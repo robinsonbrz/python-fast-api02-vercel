@@ -17,8 +17,13 @@ app = FastAPI(
 
 @app.get("/", tags=["Root"])
 async def read_root() -> dict:
+    '''
+    Essa é a rota inicial, retorna apenas uma mensagem informativa.
+    '''
     # response = RedirectResponse(url='https://www.enedino.com.br')
-    response = RedirectResponse(url='/docs')
+    # response = RedirectResponse(url='/docs')
+    # É possível redirecionar para outras url
+    response = {        "message": "Bem vindo a minha API notas, use a rota /docs para continuar"}
     return response
 
 app.include_router(NoteRouter, prefix="/note")
