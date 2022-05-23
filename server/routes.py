@@ -12,33 +12,45 @@ notes = {
     },
     "2": {
         "title": "Uniform circular motion.",
-        "content": "Consider a body moving round a circle of radius r, wit uniform speed v as shown below. The speed everywhere is the same as v but direction changes as it moves round the circle."
+        "content": "Consider a body moving round a circle of radius r"
     }
 }
 
 
 @router.get("/")
-async def get_notes() -> dict:
-    return {"data": notes}
+def get_notes() -> dict:
+    return {
+        "data": notes
+    }
 
 
 @router.get("/{id}")
 async def get_note(id: str) -> dict:
     if int(id) > len(notes):
-        return {"error": "Invalid note ID"}
+        return {
+            "error": "Invalid note ID"
+        }
 
     for note in notes.keys():
         if note == id:
-            return {"data": notes[note]}
+            return {
+                "data": notes[note]
+            }
 
-@router.post("/note")
-async def add_note(note: NoteSchema = Body(...)) -> dict:
-    note.id = str(len(notes) + 1)
-    notes[note.id] = note.dict()
+    return {
+        "Error": "Invalid ID"
+    }
+
+
+@router.post("/")
+def add_note(note: NoteSchema = Body(...)) -> dict:
+    notes[str(len(notes) + 31)] = note.dict()
 
     return {
         "message": "Note added successfully"
     }
+#
+
 
 @router.put("/{id}")
 def update_note(id: str, note: NoteSchema):
@@ -52,7 +64,7 @@ def update_note(id: str, note: NoteSchema):
             "message": "Note updated successfully"
         }
     return {
-        "error": "No such with ID passed exists."
+        "error": "No such note exist"
     }
 
 
