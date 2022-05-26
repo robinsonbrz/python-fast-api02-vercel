@@ -10,7 +10,7 @@ class NoteSchema(BaseModel):
     class Config:
         schema_extra = {
             "example": {
-                "title": "LogRocket.",
-                "content": "Logrocket is the most flexible publishing company for technical authors."
+                "title": "Título da nota.",
+                "content": "Exemplo de nota."
             }
         }
